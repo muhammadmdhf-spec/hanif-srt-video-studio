@@ -42,8 +42,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Pasang Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Siapkan Android SDK bawaan runner
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platforms;android-36" "build-tools;35.0.0" || true
 
       - name: Unduh font dari Google Fonts
         run: |
